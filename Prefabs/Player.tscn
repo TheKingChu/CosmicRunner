@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://uol41rjsw3vf"]
+
+[ext_resource type="Texture2D" uid="uid://dafqoj6qwo2cd" path="res://icon.svg" id="1_s1s34"]
+[ext_resource type="Script" path="res://_Scripts/player.gd" id="1_xt5aa"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0xjh3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_s1s34")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jeljo"]
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_xt5aa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_0xjh3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jeljo")
+debug_color = Color(0.94902, 0.0745098, 0.537255, 0.419608)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.5, 2.5)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

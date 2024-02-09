@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=3 uid="uid://bt3p3ydsui7ql"]
+
+[ext_resource type="Script" path="res://_Scripts/main_character.gd" id="1_7mwv3"]
+[ext_resource type="Texture2D" uid="uid://dafqoj6qwo2cd" path="res://icon.svg" id="1_hx7w4"]
+[ext_resource type="Texture2D" uid="uid://co518byt5807v" path="res://Assets/Art/Jump_Anim.png" id="2_0c0i2"]
+[ext_resource type="Texture2D" uid="uid://w6dcevlyr7cf" path="res://Assets/Art/Run_Anim.png" id="2_22s3y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmvot"]
+atlas = ExtResource("2_0c0i2")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74uiv"]
+atlas = ExtResource("2_22s3y")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqyl1"]
+atlas = ExtResource("2_22s3y")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ex2bg"]
+atlas = ExtResource("2_22s3y")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fylej"]
+atlas = ExtResource("2_22s3y")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i88f8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qmvot")
+}],
+"loop": true,
+"name": &"Jumping",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74uiv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqyl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ex2bg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fylej")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ommpy"]
+radius = 6.5
+height = 18.0
+
+[node name="Player2D" type="CharacterBody2D"]
+script = ExtResource("1_7mwv3")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_i88f8")
+animation = &"Run"
+autoplay = "Run"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("CapsuleShape2D_ommpy")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.5, 2.5)
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(-234, -132)
+scale = Vector2(3.64844, 2.03125)
+texture_normal = ExtResource("1_hx7w4")
+action = "jump"
